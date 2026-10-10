@@ -94,6 +94,25 @@ public class GameController {
         history.push(currentAction);
     }
 
+    public void onRightDrag(int row, int col) {
+        Cell cell = gameState.getCell(row, col);
+
+        if (cell.getState() == CellState.CROSSED) return;
+
+        List<CellChange> currentAction = new ArrayList<>();
+        currentAction.add(new CellChange(row, col, cell.getState()));
+
+        if (cell.getState() == CellState.EMPTY) {
+            cell.setState(CellState.CROSSED);
+        } else if (cell.getState() == CellState.QUEEN) {
+            cell.setState(CellState.CROSSED);
+            queensPlaced--;
+            autoRemoveCrosses(row, col, currentAction);
+        }
+
+        history.push(currentAction);
+    }
+
     private void autoCrossAffectedCells(int row, int col, List<CellChange> currentAction) {
         int n = gameState.getSize();
 

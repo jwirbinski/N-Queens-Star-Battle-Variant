@@ -138,7 +138,7 @@ public class GameView extends BorderPane {
                 pane.setOnMouseDragEntered(event -> {
                     if (gameLocked) return;
 
-                    controller.onRightClick(r, c);
+                    controller.onRightDrag(r, c);
                     updateView();
                     checkWinCondition();
                 });
